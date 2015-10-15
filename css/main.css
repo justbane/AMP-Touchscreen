@@ -1,24 +1,134 @@
+
+/* 
+
+{Palette}
+    White: #ffffff;
+    Blue: #06558a;
+    Teal: #9cd5e0;
+
+
+/* GENERAL ****************************************/
+
 /* Common */
-.hidden {
-    display: none;
+body {
+    font-family:Arial,sans-serif;
+    line-height:90px;
+    font-size:90px;
+    color:#06558a;
 }
+
 .error {
     color: red;
 }
 
 
+/* Color */
+.white-text { color:#fff; }
+.white-bg { background-color:#fff; }
+.blue-text { color:#06558a; }
+.blue-bg { background-color:rgba(6,85,138, 0.9); }
+
+/* Footer */
+.footer {
+    position:absolute;
+    bottom:0;
+    z-index:100;
+}
+
+/* UTILITY ****************************************/
+
 /* Carousel Styles */
 .carousel {
     height: 1080px;
+    width: 1920px;
 }
-.carousel-item {
+.carousel-inner {
+    height:100%;
+}
+.item {
     height: 100%;
+    width:100%;
 }
 .carousel-content {
-    width: 70%;
-    margin: 10% auto;
-    top: 0; left: 0; bottom: 0; right: 0;
-    /*border: 1px solid #eee;*/
+    width: 1555px;
+    height:410px;
+    margin:0 auto;
+    top: 100px; left: 0; bottom: 0; right: 0;
+    position:relative;
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+    bottom:300px;
+    right:600px;
+    left:initial;
+    width:347px;
+
+    font-size:14px;
+    line-height:14px;
+}
+
+.carousel-indicators li,
+.carousel-indicators .active {
+    background-color: rgba(0,0,0,0.16);
+    border:0;
+    border-radius:50%;
+    width:30px;
+    height:30px;
+    margin:0 8px;
+}
+
+.carousel-indicators .active {
+    background-color: #06558a;
+}
+
+/* Carousel Controls */
+.carousel .carousel-control {
+    background:none;
+    transition:all 0.3s;
+}
+
+.carousel-control.right {
+    background:url(../img/next-slide-btn.png) 50% 50% no-repeat;
+    height:86px;
+    width:390px;
+
+    right:197px;
+    top:707px;
+    opacity:1;
+    z-index:110;
+}
+
+.next-slide-btn {
+    font-weight:normal;
+    font-size:55px;
+    line-height: 89px;
+    vertical-align:middle;
+}
+
+.carousel-control.left {
+    opacity:1;
+}
+
+.back-slide-btn {
+    text-shadow:none;
+}
+
+.carousel-control.left:hover,
+.carousel-control.left:focus {
+    color:#06558a;
+}
+
+
+/* Controls */
+#controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display:none;
+}
+#controls button, #controls div {
+    display: inline-block;
 }
 
 
@@ -32,21 +142,40 @@
     width: 100%;
 }
 
+/* DYNAMIC ELEMENTS ****************************************/
 
-/* Controls */
-#controls {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-#controls button, #controls div {
-    display: inline-block;
+
+/* Modular classes */
+.hide { display: none; }
+.show { display: block; }
+
+.click { pointer-events:auto; z-index:110; }
+.no-click { pointer-events:none; z-index:108; }
+
+.fadeout { opacity:0; }
+.fadein { opacity:1; }
+
+
+/* Faces */
+.face-inner {
+    position:absolute;
+    top:0;
+    left:0;
+    transition:all 0.3s;
 }
 
-.carousel-indicators li {
-    background-color: #666;
+/* Face switch */
+.carousel-face-switch {
+    height:86px;
+    width:390px;
+    position:absolute;
+    right:197px;
+    top:707px;
+    opacity:1;
+    z-index:109;
+    cursor:pointer;
 }
 
-.carousel-indicators .active {
-    background-color: #333;
-}
+
+/* CONTENT ****************************************/
+
