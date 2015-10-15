@@ -1,0 +1,52 @@
+/* Common */
+.hidden {
+    display: none;
+}
+.error {
+    color: red;
+}
+
+
+/* Carousel Styles */
+.carousel {
+    height: 1080px;
+}
+.carousel-item {
+    height: 100%;
+}
+.carousel-content {
+    width: 70%;
+    margin: 10% auto;
+    top: 0; left: 0; bottom: 0; right: 0;
+    /*border: 1px solid #eee;*/
+}
+
+
+/* Keyboard */
+.ui-keyboard {
+    border-radius: 0;
+    left: 0 !important;
+    top: auto !important;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+}
+
+
+/* Controls */
+#controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+#controls button, #controls div {
+    display: inline-block;
+}
+
+.carousel-indicators li {
+    background-color: #666;
+}
+
+.carousel-indicators .active {
+    background-color: #333;
+}
