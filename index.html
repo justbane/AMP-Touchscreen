@@ -19,6 +19,8 @@
     <script src="js/jquery.keyboard.extension-autocomplete.js"></script>
     <script src="js/jquery.mousewheel.js"></script>
     <script src="js/notify.min.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+    <script src="js/jquery.marquee.min.js"></script>
 
 </head>
 
@@ -39,41 +41,47 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
 
-            <div class="item active" id="s-one">
+            <div class="item active" id="slide-one">
                 <div class="carousel-content face">
-                    <div class="face-inner f-one">
+                    <div class="face-inner face-one">
+                        <div class="marquee marquee-left">
+                            ABL1  AKT1  AKT3  ALK  AR  AXL  BRAF  CCND1  CDK4  CDK6  CTNNB1  DDR2  EGFR  ERBB2  ERBB3  ERBB4  ERG  ESR1  ETV1  ETV4  ETV5  FGFR1  FGFR2  FGFR3  FGFR4  GNA11  GNAQ  HRAS
+                        </div>
+                        <div class="marquee marquee-right" data-direction="right">
+                            GNAQ  HRAS  IDH1  IDH2  JAK1  JAK2  JAK3  KIT  KRAS  MAP2K1  MAP2K2  MET  MTOR  MYC  MYCN  NRAS  NTRK1  NTRK2  NTRK3  PDGFRA  PIK3CA  PPARG  RAF1  RET  ROS1  SMO
+                        </div>
                         Can you use <strong>NGS</strong> to <strong>detect relevant biomarkers</strong> across <strong>52 solid tumor genes in a single run</strong>?
                     </div>
-                    <div class="face-inner f-two fadeout">
+                    <div class="face-inner face-two fadeout small-scale">
                         YES with Ion Torrent<sup>&trade;</sup> Oncomine<sup>&trade;</sup> Focus Assay
                     </div>
                 </div>
             </div>
 
-            <div class="item blue-bg" id="s-two">
+            <div class="item blue-bg" id="slide-two">
                 <div class="carousel-content white-text">
                     The Oncomine Focus Assay requires as little as 10ng of input DNA or RNA
                 </div>
             </div>
 
-            <div class="item" id="s-three">
+            <div class="item" id="slide-three">
                 <div class="carousel-content face">
-                    <div class="face-inner f-one">
+                    <div class="face-inner face-one">
                         How do you get from Point A to Point B?
                     </div>
-                    <div class="face-inner f-two fadeout">
+                    <div class="face-inner face-two fadeout">
                         Use Ion Torrent<sup>&trade;</sup> Oncomine<sup>&trade;</sup> Knowledgebase Reporter software.
                         <h2><br>In <strong>three easy steps</strong> you can generate a report containing meticulously curated information from US and EU databases.</h2>
                     </div>
                 </div>
             </div>
 
-            <div class="item" id="s-four">
+            <div class="item" id="slide-four">
                 <div class="carousel-content face">
-                    <div class="face-inner f-one">
+                    <div class="face-inner face-one">
                         What kind of sensitivity can I expect from the Oncomine Focus assay?
                     </div>
-                    <div class="face-inner f-two fadeout">
+                    <div class="face-inner face-two fadeout">
                         A study testing Oncomine Focus Assay against verified moluecular standards showed
                         <div class="large-text">
                             &gt;99% SENSITIVITY
@@ -83,24 +91,24 @@
                 </div>
             </div>
 
-            <div class="item blue-bg white-text" id="s-five">
+            <div class="item blue-bg white-text" id="slide-five">
                 <div class="carousel-content">
                     Oncomine Focus Assay assesses relevant genes <strong>across 23 cancer types</strong> and includes:
                 </div>
             </div>
 
-            <div class="item" id="s-six">
+            <div class="item" id="slide-six">
                 <div class="carousel-content face">
-                    <div class="face-inner f-one">
+                    <div class="face-inner face-one">
                         Is there an easy way to find clinical trials for a specific biomarker by location?
                     </div>
-                    <div class="face-inner f-two fadeout">
+                    <div class="face-inner face-two fadeout">
                         Oncomine Knowledgebase Reporter provides global clinical trial information for <strong>69 countries</strong> including:
                     </div>
                 </div>
             </div>
 
-            <div class="item" id="s-seven">
+            <div class="item" id="slide-seven">
                 <div class="carousel-content">
                     <form id="form">
                         <div class="form-group">

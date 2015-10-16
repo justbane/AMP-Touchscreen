@@ -50,7 +50,7 @@ body {
     width:100%;
 }
 .carousel-content {
-    width: 1555px;
+    width: 1537px;
     height:410px;
     margin:0 auto;
     top: 100px; left: 0; bottom: 0; right: 0;
@@ -156,6 +156,7 @@ body {
 .fadeout { opacity:0; }
 .fadein { opacity:1; }
 
+.small-scale { transform: scale(0.5); }
 
 /* Faces */
 .face-inner {
@@ -177,6 +178,29 @@ body {
     cursor:pointer;
 }
 
+/* Marquee */
+.marquee {
+    font-size:43px;
+    line-height:45px;
+    color:#7a7d80;
+    position:absolute;
+    white-space:nowrap;
+    width:1980px;
+}
+
+.marquee-left {
+    top:-140px;
+    left:-220px
+}
+
+.marquee-right {
+    top:-95px;
+    right:-240px;
+}
+
 
 /* CONTENT ****************************************/
 
+#slide-one .face-one {
+    margin-top:140px;   
+}

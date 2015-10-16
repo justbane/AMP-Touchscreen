@@ -69,18 +69,29 @@ $(function() {
     // CAROUSEL FACE SWITCH OBJECT
     var faceManager = (function() {
 
+        // ELEMENTS ************************/
+
         // Face Elements
         var faces = $('.face'), // parent of face one and face two
-            faceOne = $('.f-one'), // face one
-            faceTwo = $('.f-two'), // face two
-            faceIndex = 0;
+            faceOne = $('.face-one'), // face one
+            faceTwo = $('.face-two'), // face two
+            faceIndex = 0,
+            touchIndex = 0; // Resetting face switch button
+
+
+        // SWITCHING ************************/
 
         function faceSwitch() {
             $('.carousel-face-switch').click(function() {
 
                 // Handle class switching for opacity
-                $(faces[faceIndex]).find('.f-one').removeClass('fadein').addClass('fadeout');
-                $(faces[faceIndex]).find('.f-two').removeClass('fadeout').addClass('fadein');
+                //$(faces[faceIndex]).find('.face-one').removeClass('fadein').addClass('fadeout');
+                //$(faces[faceIndex]).find('.face-two').removeClass('fadeout').addClass('fadein');
+                faceSwitchAnimate(
+                    $(faces[faceIndex]).find('.face-one'),
+                    $(faces[faceIndex]).find('.face-two')
+                )
+
 
                 // Handle event listener switching
                 $('.carousel-control.right').removeClass('no-click');
@@ -90,16 +101,14 @@ $(function() {
         }
 
         function touchSwitch() {
-            // Resetting face switch button
-            var touchIndex = 0;
-
+            
             // Hooking onto Carousel 'slide' event
             $('#carousel').on('slide.bs.carousel', function(e) {
 
                 if (touchIndex === 1 || touchIndex === 2 || touchIndex === 4) {
                     $('.carousel-control.right').addClass('no-click');
                 } else if (touchIndex === 6) {
-                    faceManager.reset();
+                    reset();
                     touchIndex = -1;
                 }
 
@@ -107,11 +116,47 @@ $(function() {
             });
         }
 
+
+        // ANIMATIONS ************************/
+
+        function ticker() {
+         //   var ticker1 = ['ABL1',  'AKT1',  'AKT3',  'ALK',  'AR',  'AXL',  'BRAF',  'CCND1',  'CDK4',  'CDK6',  'CTNNB1',  'DDR2', 'EGFR',  'ERBB2', 'ERBB3',  'ERBB4',  'ERG',  'ESR1',  'ETV1',  'ETV4',  'ETV5',  'FGFR1',  'FGFR2',  'FGFR3',  'FGFR4',  'GNA11', 'GNAQ',  'HRAS'],
+         //       ticker2 = ['GNAQ',  'HRAS',  'IDH1',  'IDH2',  'JAK1',  'JAK2',  'JAK3',  'KIT',  'KRAS',  'MAP2K1',  'MAP2K2',  'MET', 'MTOR',  'MYC',  'MYCN',  'NRAS',  'NTRK1',  'NTRK2',  'NTRK3',  'PDGFRA',  'PIK3CA',  'PPARG', 'RAF1',  'RET',  'ROS1',  'SMO'];
+
+            $('.marquee').marquee({
+                duration:10000,
+                gap:0,
+                delayBeforeStart:0,
+                direction:'left',
+                duplicated:true
+            })
+        }   
+
+        function faceSwitchAnimate(face1, face2) {
+            var tl = new TimelineMax();
+
+            tl.to(face1, 2, {
+                y: 960,
+                ease: Power1.easeIn, 
+                // Elastic.easeIn.config(2, 0.75)
+            })
+            .to(face2, 1, {
+                css:{
+                    opacity:1,
+                    scale: 1
+                }, 
+                ease:Power1.easeOut
+            });
+        }
+
+
+        // UTILITY ************************/
+
         function reset() {
 
             // Handle class switching for opacity
-            $('.f-one').addClass('fadein').removeClass('fadeout');
-            $('.f-two').addClass('fadeout').removeClass('fadein');
+            $('.face-one').addClass('fadein').removeClass('fadeout');
+            $('.face-two').addClass('fadeout').removeClass('fadein');
 
             // Handle event listener switching
             $('.carousel-control.right').addClass('no-click');
@@ -119,16 +164,28 @@ $(function() {
             faceIndex = 0;
         }
 
+        function goToSlideOne() {
+            $('#carousel').carousel(0);
+        }
+
         function init() {
             faceSwitch();
             touchSwitch();
+            ticker();
         }
+
+
+        // RETURN FUNCTIONS IN CLOSURE ************************/
 
         return {
             init: init,
-            reset: reset
+            reset: reset,
+            goToSlideOne: goToSlideOne
         }
     })();
+
+
+    // INITIATE ************************/
 
     faceManager.init();
 
