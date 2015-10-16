@@ -94,7 +94,8 @@ body {
     width:390px;
 
     right:197px;
-    top:707px;
+    bottom:287px;
+    top:initial;
     opacity:1;
     z-index:110;
 }
@@ -170,7 +171,7 @@ body {
     width:390px;
     position:absolute;
     right:197px;
-    top:707px;
+    bottom:287px;
     opacity:1;
     z-index:109;
     cursor:pointer;

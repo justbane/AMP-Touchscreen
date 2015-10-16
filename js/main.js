@@ -89,26 +89,50 @@ $(function() {
             });
         }
 
+        function touchSwitch() {
+            // Resetting face switch button
+            var touchIndex = 0;
+
+            // Hooking onto Carousel 'slide' event
+            $('#carousel').on('slide.bs.carousel', function(e) {
+
+                if (touchIndex === 1 || touchIndex === 2 || touchIndex === 4) {
+                    $('.carousel-control.right').addClass('no-click');
+                } else if (touchIndex === 6) {
+                    faceManager.reset();
+                    touchIndex = -1;
+                }
+
+                touchIndex++;
+            });
+        }
+
         function reset() {
 
             // Handle class switching for opacity
-            $('.f-one').addClass('fadein').removeclass('fadeout');
-            $('.f-two').addClass('fadeout').removeclass('fadein');
+            $('.f-one').addClass('fadein').removeClass('fadeout');
+            $('.f-two').addClass('fadeout').removeClass('fadein');
 
             // Handle event listener switching
-            $('.carousel-control.right').removeClass('no-click');
+            $('.carousel-control.right').addClass('no-click');
 
             faceIndex = 0;
         }
 
+        function init() {
+            faceSwitch();
+            touchSwitch();
+        }
+
         return {
-            init: faceSwitch,
+            init: init,
             reset: reset
         }
     })();
 
     faceManager.init();
 
+    
 
 
     // KEYBOARD
