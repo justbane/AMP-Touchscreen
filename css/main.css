@@ -1,4 +1,31 @@
 
+/* KEYFRAMES */
+
+/* Bounce Out */
+@-webkit-keyframes bounceOut {
+    0% { -webkit-transform: translateY(0); }
+    20% { -webkit-transform: translateY(-50px); }
+    100% { -webkit-transform: translateY(900px); }
+}
+
+@keyframes bounceOut {
+    0% { transform: translateY(0); }
+    20% { transform: translateY(-50px); }
+    100% { transform: translateY(900px); }
+}
+
+/* Bounce Out */
+@-webkit-keyframes zoomIn {
+    0% { -webkit-transform: scale(0.5); opacity:0; }
+    100% { -webkit-transform: scale(1); opacity:1; }
+}
+
+@keyframes zoomIn {
+    0% { transform: scale(0.5); opacity:0; }
+    100% { transform: scale(1); opacity:1; }
+}
+
+
 /* 
 
 {Palette}
@@ -6,6 +33,7 @@
     Blue: #06558a;
     Teal: #9cd5e0;
 
+*/
 
 /* GENERAL ****************************************/
 
@@ -19,6 +47,10 @@ body {
 
 .error {
     color: red;
+}
+
+.clear-both {
+    clear:both;
 }
 
 
@@ -158,12 +190,28 @@ body {
 
 .small-scale { transform: scale(0.5); }
 
+
+/* Animations */
+.bounceOut {
+    -webkit-animation: bounceOut 1.5s ease-in-out forwards;
+    animation: bounceOut 1.5s ease-in-out forwards;
+}
+
+.zoomIn {
+    -webkit-animation: zoomIn 1.5s ease-out forwards;
+    animation: zoomIn 1.5s ease-out forwards;
+}
+
 /* Faces */
 .face-inner {
     position:absolute;
     top:0;
     left:0;
     transition:all 0.3s;
+}
+
+.face-two {
+    opacity:0;
 }
 
 /* Face switch */
@@ -201,6 +249,59 @@ body {
 
 /* CONTENT ****************************************/
 
-#slide-one .face-one {
+/* Slide One */
+#slide-one .face-one,
+#slide-one .face-two {
     margin-top:140px;   
 }
+
+#slide-one .face-two img {
+    float:right;
+    width: 538px;
+    margin-left: -82px;
+}
+
+#slide-one .face-two .copy-style {
+    float:left;
+    width: 999px;
+}
+
+#slide-one .copy-style-inner {
+    width: 43%;
+    display:inline-block;
+}
+
+#slide-one .copy-style-inner span {
+    display:block;
+    position:relative;
+    line-height: 0px;
+}
+
+#slide-one .copy-style .one {
+    display:inline-block;
+    font-size: 262px;
+    font-weight:bold;
+    width: 479px;
+    line-height: 216px;
+    vertical-align: top;
+    letter-spacing: -16px;
+    margin-top: 29px;
+}
+
+#slide-one .copy-style .two {
+    font-size: 49px;
+    top: 10px;
+}
+
+#slide-one .copy-style .three {
+    font-size: 82px;
+    top: 77px;
+}
+
+#slide-one .copy-style .four {
+    font-size: 75px;
+    top: 150px;
+}
+
+#slide-one .copy-style .two sup { vertical-align: -4px; }
+#slide-one .copy-style .three sup { vertical-align: -15px; }
