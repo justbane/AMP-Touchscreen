@@ -27,6 +27,13 @@
 <body>
 
     <div id="carousel" class="carousel slide" data-interval="false" data-ride="carousel">
+
+        <!-- Background Video -->
+        <video loop autoload autoplay class="bg-video">
+            <source src="video/bg.mp4" type="video/mp4">
+        </video>
+        <!-- end background video -->
+
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#carousel" data-slide-to="0" class="active"></li>
@@ -153,7 +160,7 @@
         </div>
 
         <!-- Controls -->
-        <a class="left carousel-control blue-text" href="#carousel" role="button" data-slide="prev">
+        <a class="left carousel-control white-text no-click fadeout" href="#carousel" role="button" data-slide="prev">
             <span class="back-slide-btn">Back</span>
         </a>
         <a class="right carousel-control white-text no-click" href="#carousel" role="button" data-slide="next">

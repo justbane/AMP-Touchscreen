@@ -15,7 +15,6 @@ var Carousel = (function() {
     };
 });
 
-
 // WINDOW ****************************************************/
 
 var Window = (function() {
@@ -73,122 +72,224 @@ var Controls = (function() {
 })();
 
 
-// FACEMANAGER ****************************************************/
+// EVENTS MANAGER ****************************************************/
 
-// CAROUSEL FACE SWITCH OBJECT
-var faceManager = (function() {
+var eventsMgr = (function() {
 
-    // ELEMENTS ************************/
+    var touchIndex = 0, // Resetting face switch button
+        backBtnClicked = false,
+        backBtn = $('.carousel-control.left'),
+        forwardBtn = $('.carousel-control.right'),
+        faces = $('.face'),
+        faceOne = $('.face-one'),
+        faceTwo = $('.face-two'),
+        marquee = $('.marquee');
+    
 
-    // Face Elements
-    var touchIndex = 0; // Resetting face switch button
-
+    /* METHODS */
 
     // Switching Face and Slide buttons
-    function touchSwitch() {
-        
+    //      This function will either add or remove the no-click class,
+    //      giving the element 'pointer-events:none;' based on an index
+    //      (touchIndex) which increments at the end of each 
+    //      'slide' event dependent on which carousel control button
+    //      was clicked.
+    function slideEvents() {
+        console.group('Slide Tracking');
         // Hooking onto Carousel 'slide' event
         $('#carousel').on('slide.bs.carousel', function(e) {
-
-            if (touchIndex === 1 || touchIndex === 2 || touchIndex === 4) {
-                $('.carousel-control.right').addClass('no-click');
-            } else if (touchIndex === 6) {
-                reset();
-                touchIndex = -1;
+            
+            // Conditional index increment
+            if (!backBtnClicked) {
+                touchIndex++;
+            } else {
+                events.emit('backBtnClicked', true);
+                touchIndex--;
+            }
+            
+            console.log('touchIndex: ' + touchIndex);
+            // These conditionals set slides to their initial state
+            // Slide 0
+            if (touchIndex === 0) {
+                console.log('Slide 0 ' + touchIndex);
+                $(faceOne[touchIndex]).removeClass('bounceOut');
+                $(faceTwo[touchIndex]).removeClass('zoomIn');
+                marquee.removeClass('fadeout');
+                forwardBtn.addClass('no-click');
             }
 
-            touchIndex++;
+            // Slide 1
+            if (touchIndex === 1) {
+                console.log('Slide 1 ' + touchIndex);
+                backBtn.removeClass('fadeout no-click');
+
+                events.emit('blueSlide', true);
+            }
+
+            // Slide 2
+            if (touchIndex === 2) {
+                console.log('Slide 2 ' + touchIndex);
+                console.log(faceOne[touchIndex])
+                $(faceOne[touchIndex]).removeClass('bounceOut');
+                $(faceTwo[touchIndex]).removeClass('zoomIn');
+                forwardBtn.addClass('no-click');
+
+                events.emit('whiteSlide', true);
+            }
+
+            // Slide 3
+            if (touchIndex === 3) {
+                console.log('Slide 3 ' + touchIndex);
+                $(faceOne[touchIndex]).removeClass('bounceOut');
+                $(faceTwo[touchIndex]).removeClass('zoomIn');
+                forwardBtn.addClass('no-click');
+            }
+
+            // Slide 4
+            if (touchIndex === 4) {
+                console.log('Slide 4 ' + touchIndex);
+                events.emit('blueSlide', true);
+            }
+
+            // Slide 5
+            if (touchIndex === 5) {
+                console.log('Slide 5 ' + touchIndex);
+                $(faceOne[touchIndex]).removeClass('bounceOut');
+                $(faceTwo[touchIndex]).removeClass('zoomIn');
+                forwardBtn.addClass('no-click');
+
+                events.emit('whiteSlide', true);
+            }
+
+            // Slide 6
+            if (touchIndex === 6) {
+                console.log('Slide 6 ' + touchIndex);
+                backBtn.addClass('fadeout');
+            }
+
+            // Reset slides
+            if (touchIndex === 7) {
+                console.log('Slide Reset');
+                console.groupEnd();
+                reset();
+                touchIndex = 0;
+            }
+
+
+            // Next slide button
+        //     if (touchIndex === 1 || 
+        //         touchIndex === 2 || 
+        //         touchIndex === 4) {
+        //         $('.carousel-control.right').addClass('no-click');
+        //     } else if (touchIndex === 6) {
+        //         reset();
+        //         touchIndex = -1;
+        //     }
+
+        //     // color slide indicator
+        //     if (touchIndex === 0 || 
+        //         touchIndex === 3) {
+        //         // blue slide
+        //         events.emit('blueSlide', true);
+        //     } else {
+        //         // white slide event
+        //         events.emit('whiteSlide', true);
+        //     }
+
+        //     // Back slide button
+        //     if (touchIndex == 5) {
+        //         backBtn.addClass('fadeout no-click');
+        //     }
+        // });
+
+        // // Hooking onto Carousel 'slid' event
+        // $('#carousel').on('slid.bs.carousel', function(e) {
+
+        //     // Back slide button
+        //     if (touchIndex === 0) {
+        //         backBtn.removeClass('fadeout no-click');
+        //     }
         });
     }
 
-
-    // Face Switching
+    // Face Switching Event Emitter
     function faceSwitch() {
         $('.carousel-face-switch').on('click', function() {
             events.emit('faceSwitch', true);
         });
     }
 
+    // Carousel Control Button Tracker
+    function carouselControl() {
+        forwardBtn.on('click', function() {
+            backBtnClicked = false;
+        });
+
+        backBtn.on('click', function() {
+            backBtnClicked = true;
+        });
+    }
     
     // Utility 
     function reset() {
 
-        // Handle class switching for opacity
-        $('.face-one').addClass('fadein').removeClass('fadeout');
-        $('.face-two').addClass('fadeout').removeClass('fadein');
+        faceOne.removeClass('bounceOut');
+        faceTwo.removeClass('zoomIn');
 
-        // Handle event listener switching
-        $('.carousel-control.right').addClass('no-click');
+        marquee.removeClass('fadeout');
 
-        faceIndex = 0;
-    }
+        forwardBtn.addClass('no-click');
+        backBtn.addClass('fadeout no-click');
 
-    function goToSlideOne() {
-        $('#carousel').carousel(0);
+        // Emitter
+        events.emit('faceSwitchReset', true);
     }
 
     function init() {
+        slideEvents();
         faceSwitch();
-        touchSwitch();
+        carouselControl();
     }
-
 
     // Return
     return {
         init: init,
-        reset: reset,
-        goToSlideOne: goToSlideOne
+        reset: reset
     };
 })();
 
 
 
-// FACEMANAGER ****************************************************/
+// ANIMATION MANAGER ****************************************************/
 
-
-var animationManager = (function() {
+var animMgr = (function() {
             
     // Elements & Indices
     var faces = $('.face'), // parent of face one and face two
         faceOne = $('.face-one'), // face one
         faceTwo = $('.face-two'), // face two
-        faceIndex = 0;
+        faceIndex = 0,
+        backBtn = $('.carousel-control.left'),
+        marquee = $('.marquee');
 
-        // EVENTS
+    // EVENTS:
         // slide.bs.carousel
         // slid.bs.carousel
         // faceSwitch
-
-    // Face Switch Animation (GSAP)
-    // function faceSwitchAnimate(face1, face2) {
-    //     var tl = new TimelineMax();
-
-    //     tl.to(face1, 2, {
-    //         y: 960,
-    //         ease: Elastic.easeIn.config(2, 0.75), 
-    //     })
-    //     .to(face2, 1, {
-    //         css:{
-    //             opacity:1,
-    //             scale: 1
-    //         }, 
-    //         ease:Power1.easeOut
-    //     });
-    // }
-
+        // faceSwitchReset
+        // blueSlide
+        // whiteSlide
 
     // Face Switch Animation handler
     function faceSwitch() {
 
+        events.on('backBtnClicked', function() {
+            faceIndex--;
+        });
+
         events.on('faceSwitch', function() {
 
-            // OLD GSAP
-            // faceSwitchAnimate(
-            //     $(faces[faceIndex]).find('.face-one'),
-            //     $(faces[faceIndex]).find('.face-two')
-            // );
-
-            // Handle class switching for opacity
+            // Main face animations based on index (faceIndex)
             $(faceOne[faceIndex]).addClass('bounceOut');
 
             setTimeout(function() {
@@ -196,16 +297,27 @@ var animationManager = (function() {
                 faceIndex++;
             }, 700);
             
+            // Cleaning up
+            if (faceIndex === 0) {
+                marquee.addClass('fadeout');
+            }
 
             $('.carousel-control.right').removeClass('no-click');
-            
         });
     }
 
-    function ticker() {
-     //   var ticker1 = ['ABL1',  'AKT1',  'AKT3',  'ALK',  'AR',  'AXL',  'BRAF',  'CCND1',  'CDK4',  'CDK6',  'CTNNB1',  'DDR2', 'EGFR',  'ERBB2', 'ERBB3',  'ERBB4',  'ERG',  'ESR1',  'ETV1',  'ETV4',  'ETV5',  'FGFR1',  'FGFR2',  'FGFR3',  'FGFR4',  'GNA11', 'GNAQ',  'HRAS'],
-     //       ticker2 = ['GNAQ',  'HRAS',  'IDH1',  'IDH2',  'JAK1',  'JAK2',  'JAK3',  'KIT',  'KRAS',  'MAP2K1',  'MAP2K2',  'MET', 'MTOR',  'MYC',  'MYCN',  'NRAS',  'NTRK1',  'NTRK2',  'NTRK3',  'PDGFRA',  'PIK3CA',  'PPARG', 'RAF1',  'RET',  'ROS1',  'SMO'];
+    // Slide color handler
+    function slideColor() {
+        events.on('blueSlide', function() {
+            backBtn.removeClass('blue-text blue-arrow');
+        });
+        events.on('whiteSlide', function() {
+            backBtn.addClass('blue-text blue-arrow');
+        });
+    }
 
+    // Ticker initiate
+    function ticker() {
         $('.marquee').marquee({
             duration:10000,
             gap:0,
@@ -215,9 +327,16 @@ var animationManager = (function() {
         });
     }   
 
+    function reset() {
+        events.on('faceSwitchReset', function() {
+            faceIndex = 0;
+        });
+    }
+
     function init() {
-        ticker();
         faceSwitch();
+        slideColor();
+        ticker();
     }
 
     return {
@@ -227,6 +346,27 @@ var animationManager = (function() {
 })();
 
 
+/* TEST OBJECT */
+
+var test = {
+    faces: $('.face'),
+    faceOne: $('.face-one'),
+    faceTwo: $('.face-two'),
+    backBtn: $('.carousel-control.left'),
+    
+    // Testing animations on the fly
+    anim: function test(el, animation, timing) {
+        if (arguments.length === 3) {
+            el
+                .css('animation-timing-function', timing + ' !important')
+                .toggleClass(animation);
+        } else if (arguments.length === 2) {
+            el.toggleClass(animation);
+        } else {
+            console.log('This method requires at least 2 arguments: an element to target, and a class to toggle.');
+        }
+    }
+};
 
 // ready code
 $(function() {
@@ -234,8 +374,8 @@ $(function() {
     
     // INITIATE ************************/
 
-    var fm = new faceManager.init();
-    var am = new animationManager.init();
+    var em = new eventsMgr.init();
+    var am = new animMgr.init();
 
     // KEYBOARD
     $('.keyboard').keyboard({
