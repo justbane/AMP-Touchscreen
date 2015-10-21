@@ -128,6 +128,10 @@ var eventsMgr = (function() {
                 forwardBtn.removeClass('no-click');
 
                 events.emit('blueSlide', true);
+
+                if (backBtnClicked) {
+                    events.emit('backBtnClicked', 1);
+                }
             }
 
             // Slide 2, Face 1
@@ -139,7 +143,6 @@ var eventsMgr = (function() {
                 if (backBtnClicked) {
                     events.emit('backBtnClicked', 1);
                 }
-                
             }
 
             // Slide 3, Face 2
