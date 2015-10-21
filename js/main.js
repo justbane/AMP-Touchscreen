@@ -108,7 +108,7 @@ var eventsMgr = (function() {
 
                 // See method below -- this is default face resetting
                 // The argument is index of face to reset
-                faceReset(0)
+                faceReset(0);
 
                 // Slide particular resetting
                 marquee.removeClass('fadeout');
@@ -197,19 +197,23 @@ var eventsMgr = (function() {
     
     // Utility 
     function faceReset(index) {
-        $(faceOne[index]).removeClass('bounceOut');
-        $(faceTwo[index]).removeClass('zoomIn');
-        forwardBtn.addClass('no-click');
+        if (arguments.length === 1) {
+            $(faceOne[index]).removeClass('anim-bounceOut');
+            $(faceTwo[index]).removeClass('anim-zoomIn');
+            forwardBtn.addClass('no-click');    
+        } else {
+            faceOne.removeClass('anim-bounceOut');
+            faceTwo.removeClass('anim-zoomIn');
+            forwardBtn.addClass('no-click');
+        }
+        
     }
 
     function carouselReset() {
 
-        faceOne.removeClass('bounceOut');
-        faceTwo.removeClass('zoomIn');
+        faceReset();
 
         marquee.removeClass('fadeout');
-
-        forwardBtn.addClass('no-click');
         backBtn.addClass('fadeout no-click');
 
         // Emitter
@@ -241,6 +245,7 @@ var animMgr = (function() {
         faceTwo = $('.face-two'), // face two
         faceIndex = 0,
         backBtn = $('.carousel-control.left'),
+        forwardBtn = $('.carousel-control.right'),
         marquee = $('.marquee');
 
     // EVENTS:
@@ -261,10 +266,10 @@ var animMgr = (function() {
         events.on('faceSwitch', function() {
 
             // Main face animations based on index (faceIndex)
-            $(faceOne[faceIndex]).addClass('bounceOut');
+            $(faceOne[faceIndex]).addClass('anim-bounceOut');
 
             setTimeout(function() {
-                $(faceTwo[faceIndex]).addClass('zoomIn');  
+                $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
                 faceIndex++;  
             }, 700);
             
@@ -275,7 +280,6 @@ var animMgr = (function() {
 
             $('.carousel-control.right').removeClass('no-click');
 
-            
         });
     }
 
@@ -300,10 +304,71 @@ var animMgr = (function() {
         });
     }   
 
+    // Touch feedback
+    function touchFeedback() {
+        var clickIndex = 0;
+
+        $(window).on('click', function(e) {
+
+            // Coordinates
+            var x = e.pageX,
+                y = e.pageY;
+
+
+            // Create absolutely positioned element with relative positioned element inside
+            // so that we can position elements around the click!
+            var absEl = $(document.createElement('div'))
+                .addClass('click-feedback-absolute click-index-' + clickIndex)
+                .css({
+                    top:y,
+                    left:x
+                }),
+                relEl = $(document.createElement('div')).addClass('click-feedback'),
+                thisIndex = clickIndex; // Also saving this element's index for removal.
+
+            // Insert elements into DOM.
+
+            // Coordinates of Forward Button
+            if ((x > 1332 && x < 1724) && (y > 706 && y < 792)) {
+
+                var btnFeedback = $(document.createElement('div'))
+                    .addClass('button-feedback anim-buttonFeedback click-index-' + clickIndex);
+                    btnFeedbackSheen = $(document.createElement('div'))
+                    .addClass('button-feedback-sheen anim-btnFeedbackSheen click-index-' + clickIndex);
+                forwardBtn.append(btnFeedback, btnFeedbackSheen);
+            } else {
+                $('#carousel').append(absEl);
+                $('.click-index-' + clickIndex).append(relEl);
+            }
+
+            // Removing old click elements
+            setTimeout(function() {
+                $('.click-index-' + thisIndex).remove();
+            }, 1000);
+
+            // Updating clickIndex, and resetting it to 0 to keep it tidy.
+            clickIndex++;
+            if (clickIndex > 10) {
+                clickIndex = 0;
+            }
+        });
+    }
+
+    function forwardBtnAnim() {
+
+
+        forwardBtn.addClass('anim-forwardBtnIdle');
+        $('.carousel-face-switch').addClass('anim-forwardBtnIdle');
+
+        // Color switch
+        events.on('blueSlide', function() {
+            //
+        });
+    }
+
     function reset() {
         events.on('faceSwitchReset', function() {
             faceIndex = 0;
-            console.log('faceSwitchReset')
         });
     }
 
@@ -311,6 +376,8 @@ var animMgr = (function() {
         faceSwitch();
         slideColor();
         ticker();
+        touchFeedback();
+        forwardBtnAnim();
         reset();
     }
 
