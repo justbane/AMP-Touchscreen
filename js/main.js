@@ -98,7 +98,7 @@ var eventsMgr = (function() {
             if (!backBtnClicked) {
                 touchIndex++;
             } else {
-                events.emit('backBtnClicked', true);
+                events.emit('backBtnClicked', -1);
                 touchIndex--;
             }
             
@@ -113,6 +113,8 @@ var eventsMgr = (function() {
                 // Slide particular resetting
                 marquee.removeClass('fadeout');
                 backBtn.addClass('fadeout no-click');
+
+                events.emit('whiteSlide', true);
                 
                 if (backBtnClicked) {
                     // Pass the index of the face to reset!
@@ -123,6 +125,7 @@ var eventsMgr = (function() {
             // Slide 1
             if (touchIndex === 1) {
                 backBtn.removeClass('fadeout no-click');
+                forwardBtn.removeClass('no-click');
 
                 events.emit('blueSlide', true);
             }
@@ -136,11 +139,14 @@ var eventsMgr = (function() {
                 if (backBtnClicked) {
                     events.emit('backBtnClicked', 1);
                 }
+                
             }
 
             // Slide 3, Face 2
             if (touchIndex === 3) {
                 faceReset(2);
+
+                events.emit('whiteSlide', true);
 
                 if (backBtnClicked) {
                     events.emit('backBtnClicked', 2);
@@ -149,6 +155,8 @@ var eventsMgr = (function() {
 
             // Slide 4
             if (touchIndex === 4) {
+                forwardBtn.removeClass('no-click');
+
                 events.emit('blueSlide', true);
             }
 
@@ -260,7 +268,9 @@ var animMgr = (function() {
     function faceSwitch() {
 
         events.on('backBtnClicked', function(index) {
-            faceIndex = index;
+            if (index > -1) {
+                faceIndex = index;   
+            }
         });
 
         events.on('faceSwitch', function() {
@@ -287,9 +297,11 @@ var animMgr = (function() {
     function slideColor() {
         events.on('blueSlide', function() {
             backBtn.removeClass('blue-text blue-arrow');
+            forwardBtn.addClass('white-bg blue-text');
         });
         events.on('whiteSlide', function() {
             backBtn.addClass('blue-text blue-arrow');
+            forwardBtn.removeClass('white-bg blue-text');
         });
     }
 
@@ -310,10 +322,9 @@ var animMgr = (function() {
 
         $(window).on('click', function(e) {
 
-            // Coordinates
+            // Grab click coordinates
             var x = e.pageX,
                 y = e.pageY;
-
 
             // Create absolutely positioned element with relative positioned element inside
             // so that we can position elements around the click!
@@ -326,9 +337,9 @@ var animMgr = (function() {
                 relEl = $(document.createElement('div')).addClass('click-feedback'),
                 thisIndex = clickIndex; // Also saving this element's index for removal.
 
-            // Insert elements into DOM.
-
-            // Coordinates of Forward Button
+            // Insert elements into the DOM.
+            // IF inside the coordinates of the forward button, run that animation,
+            // otherwise, add the default touch feedback animation
             if ((x > 1332 && x < 1724) && (y > 706 && y < 792)) {
 
                 var btnFeedback = $(document.createElement('div'))
