@@ -83,6 +83,7 @@ var eventsMgr = (function() {
         faces = $('.face'),
         faceOne = $('.face-one'),
         faceTwo = $('.face-two'),
+        landingAnim = $('.landingAnim'),
         marquee = $('.marquee');
     
 
@@ -122,12 +123,17 @@ var eventsMgr = (function() {
                 }
             }
 
-            // Slide 1
+            // Slide 1, Landing Animation 0
             if (touchIndex === 1) {
+
+                // See method below -- this is default landing animation reset
+                landingAnimReset(0);
+
                 backBtn.removeClass('fadeout no-click');
                 forwardBtn.removeClass('no-click');
+                $('#slide-two .second-row span').removeClass('fadein');
 
-                events.emit('blueSlide', true);
+                events.emit('blueSlide', 0);
 
                 if (backBtnClicked) {
                     events.emit('backBtnClicked', 1);
@@ -145,26 +151,20 @@ var eventsMgr = (function() {
                 }
             }
 
-            // Slide 3, Face 2
+            // Slide 3, Face 2, Landing Animation 1
             if (touchIndex === 3) {
                 faceReset(2);
+                landingAnimReset(1);
 
-                events.emit('whiteSlide', true);
+                events.emit('blueSlide', 1);
 
                 if (backBtnClicked) {
                     events.emit('backBtnClicked', 2);
                 }
             }
 
-            // Slide 4
+            // Slide 4, Face 3
             if (touchIndex === 4) {
-                forwardBtn.removeClass('no-click');
-
-                events.emit('blueSlide', true);
-            }
-
-            // Slide 5, Face 3
-            if (touchIndex === 5) {
                 faceReset(3);
 
                 events.emit('whiteSlide', true);
@@ -174,9 +174,20 @@ var eventsMgr = (function() {
                 }
             }
 
-            // Slide 6
+            // Slide 5, Face 4
+            if (touchIndex === 5) {
+                faceReset(4);
+
+                events.emit('whiteSlide', true);
+
+                if (backBtnClicked) {
+                    events.emit('backBtnClicked', 3);
+                }
+            }
+
+            // Slide 6, Face 5
             if (touchIndex === 6) {
-                backBtn.addClass('fadeout');
+                faceReset(5);
             }
 
             // Reset slides
@@ -185,12 +196,28 @@ var eventsMgr = (function() {
                 touchIndex = 0;
             }
         });
+
+        $('#carousel').on('slid.bs.carousel', function(e) {
+
+            // Slide 1
+            if (touchIndex === 1) {
+
+                // Remember to pass the index of the landing animation slide to trigger!
+                events.emit('landingAnim', 0);
+            }
+
+            // Slide 2
+            if (touchIndex === 3) {
+
+                events.emit('landingAnim', 1);
+            }
+        });
     }
 
     // Face Switching Event Emitter
     function faceSwitch() {
         $('.carousel-face-switch').on('click', function() {
-            events.emit('faceSwitch', touchIndex);
+            events.emit('faceSwitch', true);
         });
     }
 
@@ -209,15 +236,18 @@ var eventsMgr = (function() {
     // Utility 
     function faceReset(index) {
         if (arguments.length === 1) {
-            $(faceOne[index]).removeClass('anim-bounceOut');
-            $(faceTwo[index]).removeClass('anim-zoomIn');
+            $(faceOne[index]).alterClass('anim-*');
+            $(faceTwo[index]).alterClass('anim-*');
             forwardBtn.addClass('no-click');    
         } else {
-            faceOne.removeClass('anim-bounceOut');
-            faceTwo.removeClass('anim-zoomIn');
+            faceOne.alterClass('anim-*');
+            faceTwo.alterClass('anim-*');
             forwardBtn.addClass('no-click');
         }
-        
+    }
+
+    function landingAnimReset(index) {
+        landingAnim.alterClass('anim-*');
     }
 
     function carouselReset() {
@@ -255,6 +285,7 @@ var animMgr = (function() {
         faceOne = $('.face-one'), // face one
         faceTwo = $('.face-two'), // face two
         faceIndex = 0,
+        landingAnim = $('.landingAnim'),
         backBtn = $('.carousel-control.left'),
         forwardBtn = $('.carousel-control.right'),
         marquee = $('.marquee');
@@ -278,17 +309,63 @@ var animMgr = (function() {
 
         events.on('faceSwitch', function() {
 
-            // Main face animations based on index (faceIndex)
-            $(faceOne[faceIndex]).addClass('anim-bounceOut');
-
-            setTimeout(function() {
-                $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
-                faceIndex++;  
-            }, 700);
-            
-            // Cleaning up
             if (faceIndex === 0) {
+                $(faceOne[faceIndex]).addClass('anim-bounceOut');
+
+                setTimeout(function() {
+                    $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
+                    faceIndex++;  
+                }, 700);    
+
+                // Cleaning up
                 marquee.addClass('fadeout');
+            }
+            
+            if (faceIndex === 1) {
+                $(faceOne[faceIndex]).addClass('anim-bounceOut');
+
+                setTimeout(function() {
+                    $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
+                    faceIndex++;  
+                }, 700);   
+            }
+
+            if (faceIndex === 2) {
+                $(faceOne[faceIndex]).addClass('anim-bounceOut');
+
+                setTimeout(function() {
+                    $(faceTwo[faceIndex]).addClass('anim-zoomIn anim-underline');  
+                    faceIndex++;  
+                }, 700);
+            }
+
+            if (faceIndex === 3) {
+                $(faceOne[faceIndex]).addClass('anim-bounceOut');
+
+                setTimeout(function() {
+                    $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
+                    faceIndex++;  
+                }, 700);    
+            }
+
+            if (faceIndex === 4) {
+                $(faceOne[faceIndex]).addClass('anim-bounceOut');
+
+                setTimeout(function() {
+                    $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
+                    faceIndex++;  
+                }, 700);    
+            }
+
+            if (faceIndex === 5) {
+                $(faceOne[faceIndex]).addClass('anim-bounceOut');
+
+                setTimeout(function() {
+                    $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
+                    faceIndex++;  
+                }, 700);    
+
+                backBtn.addClass('fadeout');
             }
 
             $('.carousel-control.right').removeClass('no-click');
@@ -296,15 +373,39 @@ var animMgr = (function() {
         });
     }
 
+    function landingAnimSet() {
+
+        // LandingAnim event passes index of pages that have landing animations
+        events.on('landingAnim', function(index) {
+
+            if (index === 0) {
+                $(landingAnim[0]).addClass('anim-rise');
+                $('#slide-two .second-row span').addClass('fadein');
+            }
+
+            if (index === 1) {
+                $(landingAnim[1]).addClass('anim-gradualFadein');
+            }
+            
+        });
+    }
+
     // Slide color handler
     function slideColor() {
-        events.on('blueSlide', function() {
+        events.on('blueSlide', function(index) {
             backBtn.removeClass('blue-text blue-arrow');
             forwardBtn.addClass('white-bg blue-text');
+
+            if (index === 0) {
+                $('.carousel-indicators li:nth-of-type(2)').addClass('white-bg');    
+            } else {
+                $('.carousel-indicators li:nth-of-type(4)').addClass('white-bg');    
+            }
         });
         events.on('whiteSlide', function() {
             backBtn.addClass('blue-text blue-arrow');
             forwardBtn.removeClass('white-bg blue-text');
+            $('.carousel-indicators li').removeClass('white-bg');
         });
     }
 
@@ -388,6 +489,7 @@ var animMgr = (function() {
 
     function init() {
         faceSwitch();
+        landingAnimSet();
         slideColor();
         ticker();
         touchFeedback();
@@ -408,6 +510,7 @@ var test = {
     faces: $('.face'),
     faceOne: $('.face-one'),
     faceTwo: $('.face-two'),
+    landingAnim: $('landingAnim'),
     backBtn: $('.carousel-control.left'),
     
     // Testing animations on the fly
@@ -421,6 +524,10 @@ var test = {
         } else {
             console.log('This method requires at least 2 arguments: an element to target, and a class to toggle.');
         }
+    },
+
+    help: function() {
+        console.log('For "test.anim(param1, param2, param3)": The first parameter is the element to manipulate, the second is the class to toggle, and the third is an optional "animation-timing-function" value.');
     }
 };
 

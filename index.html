@@ -20,6 +20,7 @@
     <script src="js/jquery.mousewheel.js"></script>
     <script src="js/notify.min.js"></script>
     <script src="js/jquery.marquee.min.js"></script>
+    <script src="js/jquery.alterclass.js"></script>
 
 </head>
 
@@ -67,47 +68,96 @@
                                 <span class="four">Focus Assay</span>                                
                             </div>
                         </div>
-                        <img src="img/s-1_f-2_block.png">
+                        <img src="img/ion-torrent-block.png">
                     </div>
                 </div>
             </div>
 
             <div class="item blue-bg" id="slide-two">
-                <div class="carousel-content white-text">
+                <div class="carousel-content landingAnim white-text">
                     The Oncomine Focus Assay requires as little as 10ng of input DNA or RNA
+                    <div class="second-row">
+                        <img src="img/needle1.png">
+                        <img src="img/needle2.png">
+                        <img src="img/needle3.png">
+                        <span>FINE NEEDLE ASPIRATES AND CORE NEEDLE BIOPSIES</span>
+                    </div>
                 </div>
             </div>
 
             <div class="item" id="slide-three">
                 <div class="carousel-content face">
                     <div class="face-inner face-one">
+                        What kind of sensitivity can I expect from the Oncomine Focus assay?
+                    </div>
+                    <div class="face-inner face-two fadeout">
+                        A study testing Oncomine Focus Assay 
+                        <br>against verified moluecular standards showed
+                        <span>&gt;99% SENSITIVITY</span>
+                        <span>N=64<span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item blue-bg white-text" id="slide-four">
+                <div class="carousel-content landingAnim face">
+                    <div class="face-inner face-one">
+                        <div class="first-row">
+                            Oncomine Focus Assay assesses relevant genes <strong>across 23 cancer types</strong> and includes:
+                        </div>
+                        <div class="second-row">
+                            <div class="fadeOne">
+                                <span class="number">35</span>
+                                <br><span class="subtitle">Hotspot Mutation<br>Genes</span>
+                                <img src="img/hexagon1.png">
+                            </div>
+                            <div class="fadeTwo">
+                                AKT1, ALK, AR, BRAF, CDK4, CTNNB1, DDR2, EGFR, ERBB2, ERBB3, ERBB4, ESR1, FGFR2, FGFR3, GNA11, GNAQ, HRAS, IDH1, IDH2, JAK1, JAK2, JAK3, KIT, KRAS, MAP2K1, MAP2K2, MET, MTOR, NRAS, PDGFRA, PIK3CA, RAF1, RET, ROS1, SMO
+                            </div>
+                            <div class="fadeThree">
+                                <span class="number">19</span>
+                                <br><span class="subtitle">Copy Number Variant<br>(CNV) Genes</span>
+                                <img src="img/hexagon1.png">
+                            </div>
+                            <div class="fadeFour">
+                                ALK, AR, BRAF, CCND1, CDK4, CDK6, EGFR, ERBB2, FGFR1, FGFR2, FGFR3, FGFR4, KIT, KRAS, MET, MYC, MYCN, PDGFRA, PIK3CA
+                            </div>
+                            <div class="fadeFive">
+                                <span class="number">23</span>
+                                <br><span class="subtitle">Fusion Genes</span>
+                                <img src="img/hexagon1.png">
+                            </div>
+                            <div class="fadeSix">
+                                ABL1, AKT3, ALK, AXL, BRAF, EGFR, ERBB2, ERG, ETV1, ETV4, ETV5, FGFR1, FGFR2, FGFR3, MET, NTRK1, NTRK2, NTRK3, PDGFRA, PPARG, RAF1, RET, ROS1
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face-inner face-two">
+                        <div class="first-row">
+                            Thank you for your interest in
+                            <span class="underline"></span>
+                        </div>
+                        <div class="second-row">
+                            <span>Oncomine</span>
+                            <br><span>Focus Assay</span>
+                            <img src="img/ion-torrent-block.png">
+                        </div>
+                        <div class="third-row">
+                            What can I do with all of the data?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="slide-five">
+                <div class="carousel-content face">
+                    <div class="face-inner face-one">
                         How do you get from Point A to Point B?
                     </div>
                     <div class="face-inner face-two fadeout">
                         Use Ion Torrent<sup>&trade;</sup> Oncomine<sup>&trade;</sup> Knowledgebase Reporter software.
-                        <h2><br>In <strong>three easy steps</strong> you can generate a report containing meticulously curated information from US and EU databases.</h2>
+                        <h2><br>In <strong>three easy steps</strong> you can generate a report containing <strong>meticulously curated</strong> information from US and EU databases.</h2>
                     </div>
-                </div>
-            </div>
-
-            <div class="item" id="slide-four">
-                <div class="carousel-content face">
-                    <div class="face-inner face-one">
-                        What kind of sensitivity can I expect from the Oncomine Focus assay?
-                    </div>
-                    <div class="face-inner face-two fadeout">
-                        A study testing Oncomine Focus Assay against verified moluecular standards showed
-                        <div class="large-text">
-                            &gt;99% SENSITIVITY
-                        </div>
-                        <br><strong>N=64</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item blue-bg white-text" id="slide-five">
-                <div class="carousel-content">
-                    Oncomine Focus Assay assesses relevant genes <strong>across 23 cancer types</strong> and includes:
                 </div>
             </div>
 
@@ -123,31 +173,49 @@
             </div>
 
             <div class="item" id="slide-seven">
-                <div class="carousel-content">
-                    <form id="form">
-                        <div class="form-group">
-                            <label class="control-label">First Name*</label>
-                            <input required="required" type="text" name="first_name" id="first_name" class="form-control keyboard" />
+                <div class="carousel-content face">
+                    <div class="face-inner face-one">
+                        <div class="left-col">
+                            <span class="first-row">Fill out this form</span>
+                            <span class="second-row">to schedule an in-depth demo and discover more.</span>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label">Last Name*</label>
-                            <input required="required" type="text" name="last_name" id="last_name" class="form-control keyboard" />
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Company</label>
-                            <input type="text" name="company" id="company" class="form-control keyboard" />
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Email*</label>
-                            <input required="required" type="email" name="email" id="email" class="form-control keyboard" />
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Phone</label>
-                            <input type="tel" name="phone" id="phone" class="form-control keyboard" />
-                        </div>
+                        <form id="form">
+                            <div class="form-group">
+                                <label class="control-label">First Name*</label>
+                                <input required="required" type="text" name="first_name" id="first_name" class="form-control keyboard" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Last Name*</label>
+                                <input required="required" type="text" name="last_name" id="last_name" class="form-control keyboard" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Company</label>
+                                <input type="text" name="company" id="company" class="form-control keyboard" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Email*</label>
+                                <input required="required" type="email" name="email" id="email" class="form-control keyboard" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Phone</label>
+                                <input type="tel" name="phone" id="phone" class="form-control keyboard" />
+                            </div>
 
-                        <button id="form-submit" class="btn btn-default">Submit</button>
-                    </form>
+                            <button id="form-submit" class="btn btn-default">Submit</button>
+                        </form>
+                        <div class="second-row">
+                            <img src="img/badge.png">
+                            Or scan your badge at the booth
+                        </div>
+                    </div>
+                    <div class="face-inner face-two">
+                        Thank you for your interest in
+                        <div class="second-row">
+                            <span>Oncomine</span>
+                            <br><span>Focus Assay</span>
+                            <img src="img/ion-torrent-block.png">
+                        </div>
+                    </div>
                 </div>
             </div>
             
