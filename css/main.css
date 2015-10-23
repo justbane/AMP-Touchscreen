@@ -837,9 +837,25 @@ strong {
     margin-top: 59px;
 }
 
+
 /* Slide Six */
 #slide-six .face-one {
     font-size:84px;
     line-height: 104px;
     margin-top: 110px;
+}
+
+
+/* Slide Seven */
+#slide-seven {
+    transition:background-color 0.3s, transform .6s ease-in-out;
+}
+
+#slide-seven .face-one {
+    font-size:40px;
+}
+
+#slide-seven .form-group {
+    width:400px;
+    display:inline-block;
 }

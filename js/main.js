@@ -189,6 +189,8 @@ var eventsMgr = (function() {
             // Slide 6, Face 5
             if (touchIndex === 6) {
                 faceReset(5);
+
+                forwardBtn.addClass('fadeout');
             }
 
             // Reset slides
@@ -261,6 +263,8 @@ var eventsMgr = (function() {
 
         marquee.removeClass('fadeout');
         backBtn.addClass('fadeout no-click');
+        forwardBtn.removeClass('fadeout');
+        $('#slide-seven').removeClass('blue-bg');
 
         // Emitter
         events.emit('faceSwitchReset', true);
@@ -365,6 +369,8 @@ var animMgr = (function() {
             if (faceIndex === 5) {
                 $(faceOne[faceIndex]).addClass('anim-bounceOut');
 
+                events.emit('blueSlide', 2);
+
                 setTimeout(function() {
                     $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
                     faceIndex++;  
@@ -372,6 +378,20 @@ var animMgr = (function() {
 
                 backBtn.addClass('fadeout');
             }
+
+            // if (faceIndex === 6) {
+            //     $(faceOne[faceIndex]).addClass('anim-bounceOut');
+
+            //     
+            //     console.log('faceswitch')
+
+            //     setTimeout(function() {
+            //         $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
+            //         faceIndex++;  
+            //     }, 700);    
+
+            //     backBtn.addClass('fadeout');
+            // }
 
             $('.carousel-control.right').removeClass('no-click');
 
@@ -404,11 +424,18 @@ var animMgr = (function() {
         events.on('blueSlide', function(index) {
             backBtn.removeClass('blue-text blue-arrow');
             forwardBtn.addClass('white-bg blue-text');
-
+            
             if (index === 0) {
                 $('.carousel-indicators li:nth-of-type(2)').addClass('white-bg');    
-            } else {
+            }
+
+            if (index === 1) {
                 $('.carousel-indicators li:nth-of-type(4)').addClass('white-bg');    
+            }
+
+            if (index === 2) {
+                $('.carousel-indicators li:nth-of-type(7)').addClass('white-bg');    
+                $('#slide-seven').addClass('blue-bg');
             }
         });
         events.on('whiteSlide', function() {
@@ -479,7 +506,6 @@ var animMgr = (function() {
     }
 
     function forwardBtnAnim() {
-
 
         forwardBtn.addClass('anim-forwardBtnIdle');
         $('.carousel-face-switch').addClass('anim-forwardBtnIdle');
