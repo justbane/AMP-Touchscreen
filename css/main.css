@@ -686,3 +686,42 @@ strong {
     text-align:center;
     margin-left: 52px;
 }
+
+
+/* Slide Five */
+#slide-five .face-one {
+    font-size:80px;
+}
+
+#slide-five .face-one .point-a,
+#slide-five .face-one .point-b {
+    font-weight:bold;
+    text-align:center;
+    display:block;
+    position:absolute;
+    width: 132px;
+    height:105px;
+    background-color:#98d2dd;
+    -webkit-clip-path: polygon(100% 0, 100% 76%, 50% 100%, 0% 76%, 0% 0%);
+}
+
+#slide-five [class^="box"] {
+    font-family:'HelveticaNeue-Light-Condensed', Helvetica, Arial, sans-serif;
+    font-size:40px;
+    line-height:108px;
+    color:#fff;
+    background-color:#5b8ab5;
+    position:absolute;
+    height:100px;
+}
+
+#slide-five .boxOne {
+    position:absolute;
+    display:block;
+    text-align:center;
+    vertical-align:middle;
+    width:205px;
+    top:350px;
+    left:150px;
+    -webkit-clip-path: polygon(87% 0, 100% 50%, 87% 100%, 0% 100%, 10% 50%, 0% 0%);
+}
