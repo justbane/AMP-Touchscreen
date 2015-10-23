@@ -166,6 +166,7 @@ var eventsMgr = (function() {
             // Slide 4, Face 3
             if (touchIndex === 4) {
                 faceReset(3);
+                landingAnimReset(2);
 
                 events.emit('whiteSlide', true);
 
@@ -181,7 +182,7 @@ var eventsMgr = (function() {
                 events.emit('whiteSlide', true);
 
                 if (backBtnClicked) {
-                    events.emit('backBtnClicked', 3);
+                    events.emit('backBtnClicked', 4);
                 }
             }
 
@@ -206,10 +207,14 @@ var eventsMgr = (function() {
                 events.emit('landingAnim', 0);
             }
 
-            // Slide 2
+            // Slide 3
             if (touchIndex === 3) {
-
                 events.emit('landingAnim', 1);
+            }
+
+            // Slide 4
+            if (touchIndex === 4) {
+                events.emit('landingAnim', 2);
             }
         });
     }
@@ -385,6 +390,10 @@ var animMgr = (function() {
 
             if (index === 1) {
                 $(landingAnim[1]).addClass('anim-gradualFadein');
+            }
+
+            if (index === 2) {
+                $(landingAnim[2]).addClass('anim-lineNarrative');
             }
             
         });
