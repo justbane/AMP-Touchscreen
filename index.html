@@ -189,7 +189,23 @@
                         Is there an easy way to find clinical trials for a specific biomarker by location?
                     </div>
                     <div class="face-inner face-two fadeout">
-                        Oncomine Knowledgebase Reporter provides global clinical trial information for <strong>69 countries</strong> including:
+                        <div class="left-col">
+                            <span>Oncomine Knowledgebase Reporter provides global clinical trial information for <strong>69 countries</strong> including:</span>
+                            <ul class="left-list">
+                                <li>Clinical trial numbers and all known identifiers</li>
+                                <li>Study name</li>
+                                <li>Population segment</li>
+                            </ul><!--
+                            --><ul class="right-list">
+                                <li>Phase Therapy</li>
+                                <li>Country (and states for US)</li>
+                                <li>Contact information enrollment (when available)</li>
+                            </ul>
+                            <div class="ribbon">
+                                SEE SAMPLE REPORT AT BOOTH
+                            </div>
+                        </div>
+                        <img src="img/map.png">
                     </div>
                 </div>
             </div>
@@ -197,42 +213,46 @@
             <div class="item" id="slide-seven">
                 <div class="carousel-content face">
                     <div class="face-inner face-one">
-                        <div class="left-col">
+                        <div class="left-col font-lt-cd">
                             <span class="first-row">Fill out this form</span>
                             <span class="second-row">to schedule an in-depth demo and discover more.</span>
                         </div>
                         <form id="form">
                             <div class="form-group">
-                                <label class="control-label">First Name*</label>
-                                <input required="required" type="text" name="first_name" id="first_name" class="form-control keyboard" />
+                                <!-- <label class="control-label">First Name*</label> -->
+                                <input required="required" placeholder="First Name" type="text" name="first_name" id="first_name" class="form-control keyboard" />
+                                <div class="req-label">REQUIRED</div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Last Name*</label>
-                                <input required="required" type="text" name="last_name" id="last_name" class="form-control keyboard" />
+                                <!-- <label class="control-label">Email*</label> -->
+                                <input required="required" placeholder="Email" type="email" name="email" id="email" class="form-control keyboard" />
+                                <div class="req-label">REQUIRED</div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Company</label>
-                                <input type="text" name="company" id="company" class="form-control keyboard" />
+                                <!-- <label class="control-label">Last Name*</label> -->
+                                <input required="required" placeholder="Last Name" type="text" name="last_name" id="last_name" class="form-control keyboard" />
+                                <div class="req-label">REQUIRED</div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Email*</label>
-                                <input required="required" type="email" name="email" id="email" class="form-control keyboard" />
+                                <!-- <label class="control-label">Phone</label> -->
+                                <input type="tel" placeholder="Phone" name="phone" id="phone" class="form-control keyboard" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Phone</label>
-                                <input type="tel" name="phone" id="phone" class="form-control keyboard" />
+                                <!-- <label class="control-label">Company</label> -->
+                                <input type="text" placeholder="Company" name="company" id="company" class="form-control keyboard" />
                             </div>
-
                             <button id="form-submit" class="btn btn-default">Submit</button>
+                            <img src="img/thumbs-up.png">
                         </form>
-                        <div class="second-row">
+                        <div class="second-row font-lt-cd">
                             <img src="img/badge.png">
                             Or scan your badge at the booth
                         </div>
                     </div>
                     <div class="face-inner face-two white-text">
                         Thank you for your interest in
-                        <div class="second-row">
+                        <span class="underline"></span>
+                        <div class="second-row font-lt-cd">
                             <span>Oncomine</span>
                             <br><span>Focus Assay</span>
                             <img src="img/ion-torrent-block.png">
@@ -254,6 +274,11 @@
         </a>
         <a class="right carousel-control white-text no-click" href="#carousel" role="button" data-slide="next">
             <span class="next-slide-btn">Get Answer</span>
+            <span class="next-slide-btn fadeout">Tell Me More</span>
+            <span class="next-slide-btn fadeout">Next Question</span>
+            <span class="next-slide-btn fadeout">See the Genes</span>
+            <span class="next-slide-btn fadeout">Find Out Now</span>
+            <span class="next-slide-btn fadeout">Start Over</span>
         </a>
         <a class="carousel-face-switch"></a>
     </div>

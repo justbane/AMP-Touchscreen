@@ -80,6 +80,7 @@ var eventsMgr = (function() {
         backBtnClicked = false,
         backBtn = $('.carousel-control.left'),
         forwardBtn = $('.carousel-control.right'),
+        forwardBtnText = $('.next-slide-btn'),
         faces = $('.face'),
         faceOne = $('.face-one'),
         faceTwo = $('.face-two'),
@@ -107,7 +108,6 @@ var eventsMgr = (function() {
             // Slide 0, Face 0
             if (touchIndex === 0) {
 
-                // See method below -- this is default face resetting
                 // The argument is index of face to reset
                 faceReset(0);
 
@@ -126,13 +126,13 @@ var eventsMgr = (function() {
             // Slide 1, Landing Animation 0
             if (touchIndex === 1) {
 
-                // See method below -- this is default landing animation reset
                 landingAnimReset(0);
+                forwardBtnTextSwitch($(forwardBtnText[2]));
 
                 backBtn.removeClass('fadeout no-click');
                 forwardBtn.removeClass('no-click');
                 $('#slide-two .second-row span').removeClass('fadein');
-
+                
                 events.emit('blueSlide', 0);
 
                 if (backBtnClicked) {
@@ -143,6 +143,7 @@ var eventsMgr = (function() {
             // Slide 2, Face 1
             if (touchIndex === 2) {
                 faceReset(1);
+                forwardBtnTextSwitch($(forwardBtnText[0]));
 
                 events.emit('whiteSlide', true);
 
@@ -155,6 +156,7 @@ var eventsMgr = (function() {
             if (touchIndex === 3) {
                 faceReset(2);
                 landingAnimReset(1);
+                forwardBtnTextSwitch($(forwardBtnText[2]));
 
                 events.emit('blueSlide', 1);
 
@@ -167,6 +169,7 @@ var eventsMgr = (function() {
             if (touchIndex === 4) {
                 faceReset(3);
                 landingAnimReset(2);
+                forwardBtnTextSwitch($(forwardBtnText[0]));
 
                 events.emit('whiteSlide', true);
 
@@ -178,10 +181,12 @@ var eventsMgr = (function() {
             // Slide 5, Face 4
             if (touchIndex === 5) {
                 faceReset(4);
+                forwardBtnTextSwitch($(forwardBtnText[0]));
 
                 events.emit('whiteSlide', true);
 
                 if (backBtnClicked) {
+                    forwardBtnShowToggle();
                     events.emit('backBtnClicked', 4);
                 }
             }
@@ -189,8 +194,7 @@ var eventsMgr = (function() {
             // Slide 6, Face 5
             if (touchIndex === 6) {
                 faceReset(5);
-
-                forwardBtn.addClass('fadeout');
+                forwardBtnShowToggle();
             }
 
             // Reset slides
@@ -250,6 +254,7 @@ var eventsMgr = (function() {
             faceOne.alterClass('anim-*');
             faceTwo.alterClass('anim-*');
             forwardBtn.addClass('no-click');
+            console.log('default faceReset');
         }
     }
 
@@ -259,15 +264,38 @@ var eventsMgr = (function() {
 
     function carouselReset() {
 
-        faceReset();
+        // faceReset fanciness so that the last slide doesn't reset before it's offscreen
+        $(faceOne[0]).alterClass('anim-*');
+        $(faceTwo[0]).alterClass('anim-*');
+        forwardBtn.addClass('no-click');  
+        setTimeout(faceReset, 800);
 
         marquee.removeClass('fadeout');
         backBtn.addClass('fadeout no-click');
         forwardBtn.removeClass('fadeout');
+        forwardBtnTextSwitch($(forwardBtnText[0]));
+        $('.carousel-face-switch').removeClass('no-click');
         $('#slide-seven').removeClass('blue-bg');
 
-        // Emitter
         events.emit('faceSwitchReset', true);
+        events.emit('whiteSlide', true);
+    }
+
+    function forwardBtnTextSwitch(elShow) {
+        forwardBtnText.addClass('fadeout');
+        elShow.removeClass('fadeout');
+    }
+
+    function forwardBtnShowToggle() {
+        if (forwardBtn.hasClass('fadeout')) {
+            forwardBtn.removeClass('fadeout');
+            $('.carousel-face-switch').removeClass('no-click');
+            $('#carousel').removeClass('fadeout-after');
+        } else {
+            forwardBtn.addClass('fadeout');
+            $('.carousel-face-switch').addClass('no-click');
+            $('#carousel').addClass('fadeout-after');    
+        }
     }
 
     function init() {
@@ -279,7 +307,8 @@ var eventsMgr = (function() {
     // Return
     return {
         init: init,
-        reset: carouselReset
+        reset: carouselReset,
+        forwardBtnTextSwitch: forwardBtnTextSwitch
     };
 })();
 
@@ -297,6 +326,7 @@ var animMgr = (function() {
         landingAnim = $('.landingAnim'),
         backBtn = $('.carousel-control.left'),
         forwardBtn = $('.carousel-control.right'),
+        forwardBtnText = $('.next-slide-btn'),
         marquee = $('.marquee');
 
     // EVENTS:
@@ -320,6 +350,7 @@ var animMgr = (function() {
 
             if (faceIndex === 0) {
                 $(faceOne[faceIndex]).addClass('anim-bounceOut');
+                eventsMgr.forwardBtnTextSwitch($(forwardBtnText[1]));
 
                 setTimeout(function() {
                     $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
@@ -332,6 +363,7 @@ var animMgr = (function() {
             
             if (faceIndex === 1) {
                 $(faceOne[faceIndex]).addClass('anim-bounceOut');
+                eventsMgr.forwardBtnTextSwitch($(forwardBtnText[3]));
 
                 setTimeout(function() {
                     $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
@@ -341,6 +373,7 @@ var animMgr = (function() {
 
             if (faceIndex === 2) {
                 $(faceOne[faceIndex]).addClass('anim-bounceOut');
+                eventsMgr.forwardBtnTextSwitch($(forwardBtnText[4]));
 
                 setTimeout(function() {
                     $(faceTwo[faceIndex]).addClass('anim-zoomIn anim-underline');  
@@ -350,6 +383,7 @@ var animMgr = (function() {
 
             if (faceIndex === 3) {
                 $(faceOne[faceIndex]).addClass('anim-bounceOut');
+                eventsMgr.forwardBtnTextSwitch($(forwardBtnText[2]));
 
                 setTimeout(function() {
                     $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
@@ -359,6 +393,7 @@ var animMgr = (function() {
 
             if (faceIndex === 4) {
                 $(faceOne[faceIndex]).addClass('anim-bounceOut');
+                eventsMgr.forwardBtnTextSwitch($(forwardBtnText[2]));
 
                 setTimeout(function() {
                     $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
@@ -368,30 +403,18 @@ var animMgr = (function() {
 
             if (faceIndex === 5) {
                 $(faceOne[faceIndex]).addClass('anim-bounceOut');
+                eventsMgr.forwardBtnTextSwitch($(forwardBtnText[5]));
 
                 events.emit('blueSlide', 2);
 
                 setTimeout(function() {
-                    $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
+                    $(faceTwo[faceIndex]).addClass('anim-zoomIn anim-underline');  
                     faceIndex++;  
                 }, 700);    
 
                 backBtn.addClass('fadeout');
+                forwardBtn.removeClass('fadeout no-click');
             }
-
-            // if (faceIndex === 6) {
-            //     $(faceOne[faceIndex]).addClass('anim-bounceOut');
-
-            //     
-            //     console.log('faceswitch')
-
-            //     setTimeout(function() {
-            //         $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
-            //         faceIndex++;  
-            //     }, 700);    
-
-            //     backBtn.addClass('fadeout');
-            // }
 
             $('.carousel-control.right').removeClass('no-click');
 

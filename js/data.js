@@ -91,6 +91,7 @@ var Data = (function() {
 
     function handleSuccess() {
         $.notify("Success: Thank you for submitting your information!", "success");
+        events.emit('faceSwitch');
     }
 
     function handleReset() {
