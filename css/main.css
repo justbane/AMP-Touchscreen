@@ -198,7 +198,7 @@ strong {
 .white-bg { background-color:#fff !important; }
 
 .blue-text, .blue-text:hover, .blue-text:active { color:#06558a !important; }
-.blue-bg { background-color:rgba(6,85,138, 0.9); }
+.blue-bg { background-color:rgba(6,85,138, 0.8); }
 .blue-arrow span:after { border-right-color:#06558a; }
 
 .grey-bg { background-color: rgba(238,242,244,0.5);}
@@ -243,7 +243,7 @@ strong {
 .marquee {
     font-size:43px;
     line-height:45px;
-    color:#7a7d80;
+    color:#9da1a5;
     position:absolute;
     white-space:nowrap;
     width:1980px;

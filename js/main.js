@@ -257,7 +257,6 @@ var eventsMgr = (function() {
             faceOne.alterClass('anim-*');
             faceTwo.alterClass('anim-*');
             forwardBtn.addClass('no-click');
-            console.log('default faceReset');
         }
     }
 
@@ -273,13 +272,17 @@ var eventsMgr = (function() {
         forwardBtn.addClass('no-click');  
         setTimeout(faceReset, 800);
 
+        // Setting up first slide
         marquee.removeClass('fadeout');
         backBtn.addClass('fadeout no-click');
         forwardBtn.removeClass('fadeout');
         forwardBtnTextSwitch($(forwardBtnText[0]));
         $('.carousel-face-switch').removeClass('no-click');
-        $('#slide-seven').removeClass('blue-bg');
         $('.footnote').removeClass('fadeout');
+
+        // Other misc cleanup
+        $('#slide-seven').removeClass('blue-bg');
+        touchIndex = 0;
 
         events.emit('faceSwitchReset', true);
         events.emit('whiteSlide', true);
@@ -302,10 +305,47 @@ var eventsMgr = (function() {
         }
     }
 
+    function timeReset() {
+
+        // Set 3 minute timer before reset
+        var timer = window.setTimeout(function() {
+            $('#carousel').carousel(0);
+            carouselReset();
+        }, 180000); //180000
+
+        // Reset timer on click anywhere
+        $(window).on('click', function() {
+
+            window.clearTimeout(timer);
+
+            // Call timer again
+            timer = window.setTimeout(function() {
+                $('#carousel').carousel(0);
+                carouselReset();
+            }, 180000); //180000
+        });
+
+        // Binding event handler after keyboard appears on input focus
+        $('.form-control').on('focus', function() {
+            
+            $('.ui-keyboard button').on('click', function() {
+
+                window.clearTimeout(timer);
+
+                // Call timer again
+                timer = window.setTimeout(function() {
+                    $('#carousel').carousel(0);
+                    carouselReset();
+                }, 180000); //180000
+            });
+        });
+    }
+
     function init() {
         slideEvents();
         faceSwitch();
         carouselControl();
+        timeReset();
     }
 
     // Return
@@ -548,6 +588,16 @@ var animMgr = (function() {
         });
     }
 
+    function mapTimingFunction() {
+        // This adds incremented timing delays to all 72 blue countries on slide 6, face 2
+        var svg = $('.st1');
+        var timingIncrement = 0;
+        for (var i = 0; i < svg.length; i++) {
+            $(svg[i]).css('transition-delay', timingIncrement + 'ms');
+            timingIncrement += 20;
+        }
+    }
+
     function reset() {
         events.on('faceSwitchReset', function() {
             faceIndex = 0;
@@ -561,6 +611,7 @@ var animMgr = (function() {
         ticker();
         touchFeedback();
         forwardBtnAnim();
+        mapTimingFunction();
         reset();
     }
 
@@ -601,20 +652,6 @@ var test = {
 // ready code
 $(function() {
 
-    
-    // INITIATE ************************/
-
-    var em = new eventsMgr.init();
-    var am = new animMgr.init();
-
-    // This adds incremented timing delays to all 72 blue countries on slide 6, face 2
-    var svg = $('.st1');
-    var timingIncrement = 0;
-    for (var i = 0; i < svg.length; i++) {
-        $(svg[i]).css('transition-delay', timingIncrement + 'ms');
-        timingIncrement += 20;
-    }
-
     // KEYBOARD
     $('.keyboard').keyboard({
         usePreview: false,
@@ -648,4 +685,12 @@ $(function() {
     $("#go-fullscreen").on("click", function() {
         win.goFullScreen();
     });
+
+
+     // INITIATE ************************/
+
+    var em = new eventsMgr.init();
+    var am = new animMgr.init();
+    
 });
+
