@@ -144,7 +144,7 @@ strong {
 .anim-rise .second-row img:last-of-type { animation: rise 0.4s ease-out forwards 0.4s; }
 
 /* Slide Three */
-.anim-gradualFadein [class^="fade"] { opacity:1 !important; }
+.anim-gradualFadein [class^="fade"] { opacity:1 !important; /*transform:rotate3d(0,1,0,360deg);*/ }
 .fadeOne { /* no delay */ }
 .fadeTwo  { transition-delay: 0.15s !important; }
 .fadeThree { transition-delay: 0.3s !important; }
@@ -153,7 +153,7 @@ strong {
 .fadeSix { transition-delay: 0.75s !important; }
 
 /* Slide Four */
-#slide-four .anim-underline .underline { max-width: 369px !important; opacity: 1 !important; }
+#slide-four .anim-underline .underline { max-width: 271px !important; opacity: 1 !important; }
 #slide-seven .anim-underline .underline { max-width: 429px !important; opacity: 1 !important; }
 
 /* Slide Five */
@@ -175,6 +175,8 @@ strong {
 #slide-five .boxThree { transition-delay: 2.3s; }
 #slide-five .boxFour { transition-delay: 3.5s; }
 
+/* Slide Six */
+.anim-gradualColorShift .st1 { fill:#19468D !important; }
 
 /* DYNAMIC & MODULAR CLASSES ****************************************/
 
@@ -702,18 +704,18 @@ strong {
 #slide-four .underline {
     background-color:#fff;
     display:block;
-    width: 369px;
+    width: 271px;
     height:5px;
     opacity:0;
     max-width:0;
     transition: max-width 2s ease-in-out 0.6s, opacity 1s ease-in-out 0.6s;
     position:absolute;
-    left: 280px;
-    top: 96px;
+    left: 409px;
+    top: 84px;
 }
 
 #slide-four .face-two .first-row {
-    font-size: 77px;
+    font-size: 56px;
     text-align:center;
 }
 
@@ -929,6 +931,18 @@ strong {
     top: 33px;
 }
 
+#slide-six .face-two svg {
+    position:absolute;
+    top:31px;
+    right:-50px;
+    width:1000px;
+    transition:all 0.3s;
+}
+
+#slide-six .face-two svg .st1 {
+    transition:all 0.8s;
+    fill:#BCBEC0;
+}
 
 /* Slide Seven */
 #slide-seven { transition:background-color 0.3s, transform .6s ease-in-out; }

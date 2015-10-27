@@ -396,9 +396,13 @@ var animMgr = (function() {
                 eventsMgr.forwardBtnTextSwitch($(forwardBtnText[2]));
 
                 setTimeout(function() {
-                    $(faceTwo[faceIndex]).addClass('anim-zoomIn');  
-                    faceIndex++;  
+                    $(faceTwo[faceIndex]).addClass('anim-zoomIn');
                 }, 700);    
+
+                setTimeout(function() {
+                    $(faceTwo[faceIndex]).addClass('anim-gradualColorShift');
+                    faceIndex++;  
+                }, 1500);
             }
 
             if (faceIndex === 5) {
@@ -597,6 +601,15 @@ $(function() {
 
     var em = new eventsMgr.init();
     var am = new animMgr.init();
+
+    var svg = $('.st1');
+    var i = svg.length;
+    var timingIncrement = 0;
+    while (i > -1) {
+        $(svg[i]).css('transition-delay', timingIncrement + 'ms');
+        timingIncrement += 20;
+        i--;
+    }
 
     // KEYBOARD
     $('.keyboard').keyboard({
