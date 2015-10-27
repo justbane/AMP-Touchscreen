@@ -128,6 +128,16 @@ strong {
     z-index:100;
 }
 
+.footnote {
+    font-size: 14px;
+    line-height:12px;
+    color:#fff;
+    position:absolute;
+    bottom: 26px;
+    left: 194px;
+    transition: all 0.4s;
+}
+
 
 /* ANIMATIONS *************************************/
 
@@ -495,8 +505,9 @@ strong {
 
 #slide-one .copy-style-inner {
     width: 550px;
-    display:inline-block;
-    margin-left: 10px;
+    position:absolute;
+    left: 451px;
+    top: 40px;
 }
 
 #slide-one .copy-style-inner span {
@@ -507,15 +518,13 @@ strong {
 
 #slide-one .copy-style .one {
     font-family: 'HelveticaNeue-Medium-Condensed', Helvetica, Arial, sans-serif;
-    display:inline-block;
+    position:absolute;
+    top: 165px;
     font-size: 312px;
     font-weight:bold;
     width: 418px;
-    line-height: 371px;
     vertical-align: top;
     letter-spacing: -2px;
-    margin-top: 29px;
-    margin-left: -10px;
 }
 
 #slide-one .copy-style .two {

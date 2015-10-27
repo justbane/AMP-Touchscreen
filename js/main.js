@@ -120,6 +120,7 @@ var eventsMgr = (function() {
                 if (backBtnClicked) {
                     // Pass the index of the face to reset!
                     events.emit('backBtnClicked', 0);
+                    $('.footnote').removeClass('fadeout');
                 }
             }
 
@@ -132,6 +133,7 @@ var eventsMgr = (function() {
                 backBtn.removeClass('fadeout no-click');
                 forwardBtn.removeClass('no-click');
                 $('#slide-two .second-row span').removeClass('fadein');
+                $('.footnote').addClass('fadeout');
                 
                 events.emit('blueSlide', 0);
 
@@ -170,6 +172,7 @@ var eventsMgr = (function() {
                 faceReset(3);
                 landingAnimReset(2);
                 forwardBtnTextSwitch($(forwardBtnText[0]));
+                $('.footnote').addClass('fadeout');
 
                 events.emit('whiteSlide', true);
 
@@ -276,6 +279,7 @@ var eventsMgr = (function() {
         forwardBtnTextSwitch($(forwardBtnText[0]));
         $('.carousel-face-switch').removeClass('no-click');
         $('#slide-seven').removeClass('blue-bg');
+        $('.footnote').removeClass('fadeout');
 
         events.emit('faceSwitchReset', true);
         events.emit('whiteSlide', true);
@@ -374,6 +378,7 @@ var animMgr = (function() {
             if (faceIndex === 2) {
                 $(faceOne[faceIndex]).addClass('anim-bounceOut');
                 eventsMgr.forwardBtnTextSwitch($(forwardBtnText[4]));
+                $('.footnote').removeClass('fadeout');
 
                 setTimeout(function() {
                     $(faceTwo[faceIndex]).addClass('anim-zoomIn anim-underline');  
@@ -604,12 +609,10 @@ $(function() {
 
     // This adds incremented timing delays to all 72 blue countries on slide 6, face 2
     var svg = $('.st1');
-    var i = svg.length;
     var timingIncrement = 0;
-    while (i > -1) {
+    for (var i = 0; i < svg.length; i++) {
         $(svg[i]).css('transition-delay', timingIncrement + 'ms');
         timingIncrement += 20;
-        i--;
     }
 
     // KEYBOARD
