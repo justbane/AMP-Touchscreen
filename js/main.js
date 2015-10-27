@@ -602,6 +602,7 @@ $(function() {
     var em = new eventsMgr.init();
     var am = new animMgr.init();
 
+    // This adds incremented timing delays to all 72 blue countries on slide 6, face 2
     var svg = $('.st1');
     var i = svg.length;
     var timingIncrement = 0;

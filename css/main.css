@@ -1002,6 +1002,11 @@ strong {
     width:320px;
     padding: 10px 20px 0;
     z-index:15;
+    transition:all 0.2s;
+}
+
+#slide-seven input:focus {
+    box-shadow: 0px 0px 11px 2px #06558a;
 }
 
 #slide-seven ::-webkit-input-placeholder {
@@ -1029,7 +1034,7 @@ strong {
     height:60px;
     margin-top: -3px;
     vertical-align:top;
-    -webkit-clip-path: polygon(57% 0, 65% 50%, 57% 100%, 0% 100%, 8% 50%, 0% 0%);
+    -webkit-clip-path: polygon(60% 0, 65% 50%, 60% 100%, 0% 100%, 5% 50%, 0% 0%);
     z-index: 25;
 }
 
