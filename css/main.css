@@ -1047,12 +1047,13 @@ strong {
     z-index: 25;
 }
 
-#slide-seven #form-submit:focus { outline:none; }
+#slide-seven #form-submit:focus,
+#slide-seven #form-submit:after:focus { outline:none; }
 
 #slide-seven #form-submit:after {
     content:'';
     position:absolute;
-    width: 78px;
+    width: 278px;
     height: 60px;
     top: 165px;
     right: 147px;

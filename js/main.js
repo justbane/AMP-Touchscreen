@@ -314,7 +314,7 @@ var eventsMgr = (function() {
         }, 180000); //180000
 
         // Reset timer on click anywhere
-        $(window).on('click', function() {
+        $(document.body).on('click', function() {
 
             window.clearTimeout(timer);
 
@@ -438,7 +438,7 @@ var animMgr = (function() {
 
             if (faceIndex === 4) {
                 $(faceOne[faceIndex]).addClass('anim-bounceOut');
-                eventsMgr.forwardBtnTextSwitch($(forwardBtnText[2]));
+                eventsMgr.forwardBtnTextSwitch($(forwardBtnText[6]));
 
                 setTimeout(function() {
                     $(faceTwo[faceIndex]).addClass('anim-zoomIn');
