@@ -528,7 +528,7 @@ strong {
 }
 
 #slide-one .copy-style .two {
-    font-size: 58px;
+    font-size: 49px;
     top: 27px;
 }
 
@@ -719,7 +719,7 @@ strong {
     max-width:0;
     transition: max-width 2s ease-in-out 0.6s, opacity 1s ease-in-out 0.6s;
     position:absolute;
-    left: 409px;
+    left: 364px;
     top: 84px;
 }
 
@@ -746,7 +746,7 @@ strong {
 }
 
 #slide-four .face-two .third-row {
-    font-size: 68px;
+    font-size: 76px;
     margin-top:60px;
     text-align:center;
     margin-left: 52px;
@@ -984,6 +984,7 @@ strong {
     line-height:85px;
     float:right;
     width: 780px;
+    margin-top:35px;
     position:relative;
     z-index:10;
 }
@@ -1087,7 +1088,7 @@ strong {
     max-width:0;
     transition: max-width 2s ease-in-out 0.6s, opacity 1s ease-in-out 0.6s;
     position:absolute;
-    left: 197px;
+    left: 126px;
     top: 88px;
 }
 
