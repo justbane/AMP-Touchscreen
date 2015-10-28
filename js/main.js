@@ -24,11 +24,12 @@ var Window = (function() {
     function init() {
         isFullScreened();
         isMaximized();
+        isRestored();
     }
 
     function isFullScreened() {
         main.onFullscreened.addListener(function() {
-            events.emit("fullscreen", true);
+            events.emit("fullscreen", true); 
         });
     }
 
@@ -38,6 +39,14 @@ var Window = (function() {
                 events.emit("maximized", true);
             }
         });
+    }
+
+    function isRestored() {
+        main.onRestored.addListener(function() {
+            if (!main.isFullscreen()) {
+                events.emit('maximized', true);
+            }
+        })
     }
 
     function goFullScreen() {
