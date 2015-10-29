@@ -1,4 +1,3 @@
-
 /* 
 
 {Palette}
@@ -243,7 +242,7 @@ strong {
 .marquee {
     font-size:43px;
     line-height:45px;
-    color:#9da1a5;
+    color:#BABFC3;
     position:absolute;
     white-space:nowrap;
     width:1980px;
