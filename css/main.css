@@ -350,6 +350,7 @@ strong {
 }
 .carousel-inner {
     height:100%;
+    background-color:rgba(255,255,255,0.4);
 }
 .item {
     height: 100%;
