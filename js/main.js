@@ -530,7 +530,7 @@ var animMgr = (function() {
     function ticker() {
         $('.marquee').marquee({
             duration:10000,
-            gap:0,
+            gap:13,
             delayBeforeStart:0,
             direction:'left',
             duplicated:true
