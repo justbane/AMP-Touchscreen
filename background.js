@@ -7,7 +7,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
 
   chrome.app.window.create('index.html', {
     id: 'main',
-        bounds: { width: 1920, height: 1080 }
+    bounds: { width: 1920, height: 1080}
   }, function(main) {
       main.contentWindow.onload = function() {
           main.contentWindow.Carousel().resize();

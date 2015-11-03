@@ -153,7 +153,7 @@ strong {
 .anim-rise .second-row img:last-of-type { animation: rise 0.4s ease-out forwards 0.4s; }
 
 /* Slide Three */
-.anim-gradualFadein [class^="fade"] { opacity:1 !important; /*transform:rotate3d(0,1,0,360deg);*/ }
+.anim-gradualFadein [class^="fade"] { opacity:1 !important; transform:rotate3d(0,1,0,360deg); }
 .fadeOne { /* no delay */ }
 .fadeTwo  { transition-delay: 0.15s !important; }
 .fadeThree { transition-delay: 0.3s !important; }
@@ -640,7 +640,7 @@ strong {
 }
 
 #slide-four [class^='fade'] {
-    transition:all 1.3s ease-in-out;
+    transition:all 1.7s ease-in-out;
     opacity:0;
 }
 
