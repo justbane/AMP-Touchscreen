@@ -214,6 +214,9 @@ var eventsMgr = (function() {
                 carouselReset();
                 touchIndex = 0;
             }
+
+            // Making sure face switch index can't be progressed during slide transition
+            $('.carousel-face-switch').addClass('no-click');
         });
 
         $('#carousel').on('slid.bs.carousel', function(e) {
@@ -234,6 +237,9 @@ var eventsMgr = (function() {
             if (touchIndex === 4) {
                 events.emit('landingAnim', 2);
             }
+
+            // Making sure face switch index can't be progressed during slide transition
+            $('.carousel-face-switch').removeClass('no-click');
         });
     }
 
@@ -535,6 +541,12 @@ var animMgr = (function() {
             direction:'left',
             duplicated:true
         });
+
+        // Fixing choppy animation bug by triggering redraw of element 1000ms after pageload
+        setTimeout(function() {
+            $('.marquee').trigger('click');
+            console.log('ran')
+        }, 10000);
     }   
 
     // Touch feedback

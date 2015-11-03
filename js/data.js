@@ -86,7 +86,9 @@ var Data = (function() {
     }
 
     function handleError() {
-        $.notify("Error: Please complete required fields", "error");
+        if ($('.notifyjs-wrapper').length === 0) {
+            $.notify("Error: Please complete required fields", "error");    
+        } 
     }
 
     function handleSuccess() {
