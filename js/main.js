@@ -216,7 +216,7 @@ var eventsMgr = (function() {
             }
 
             // Making sure face switch index can't be progressed during slide transition
-            $('.carousel-face-switch').addClass('no-click');
+            $('.carousel-face-switch').addClass('click-hide');
         });
 
         $('#carousel').on('slid.bs.carousel', function(e) {
@@ -239,7 +239,7 @@ var eventsMgr = (function() {
             }
 
             // Making sure face switch index can't be progressed during slide transition
-            $('.carousel-face-switch').removeClass('no-click');
+            $('.carousel-face-switch').removeClass('click-hide');
         });
     }
 
@@ -279,6 +279,23 @@ var eventsMgr = (function() {
         landingAnim.alterClass('anim-*');
     }
 
+    function forwardBtnTextSwitch(elShow) {
+        forwardBtnText.addClass('fadeout');
+        elShow.removeClass('fadeout');
+    }
+
+    function forwardBtnShowToggle() {
+        if (forwardBtn.hasClass('fadeout')) {
+            forwardBtn.removeClass('fadeout');
+            $('.carousel-face-switch').removeClass('no-click');
+            $('#carousel').removeClass('fadeout-after');
+        } else {
+            forwardBtn.addClass('fadeout');
+            $('.carousel-face-switch').addClass('no-click');
+            $('#carousel').addClass('fadeout-after');    
+        }
+    }
+
     function carouselReset() {
 
         // faceReset fanciness so that the last slide doesn't reset before it's offscreen
@@ -301,23 +318,6 @@ var eventsMgr = (function() {
 
         events.emit('faceSwitchReset', true);
         events.emit('whiteSlide', true);
-    }
-
-    function forwardBtnTextSwitch(elShow) {
-        forwardBtnText.addClass('fadeout');
-        elShow.removeClass('fadeout');
-    }
-
-    function forwardBtnShowToggle() {
-        if (forwardBtn.hasClass('fadeout')) {
-            forwardBtn.removeClass('fadeout');
-            $('.carousel-face-switch').removeClass('no-click');
-            $('#carousel').removeClass('fadeout-after');
-        } else {
-            forwardBtn.addClass('fadeout');
-            $('.carousel-face-switch').addClass('no-click');
-            $('#carousel').addClass('fadeout-after');    
-        }
     }
 
     function timeReset() {
@@ -356,11 +356,20 @@ var eventsMgr = (function() {
         });
     }
 
+    function manualReset() {
+        $('#reset').on('click', function() {
+            $('#carousel').carousel(0);
+            carouselReset();
+            console.log('click')
+        })
+    }
+
     function init() {
         slideEvents();
         faceSwitch();
         carouselControl();
         timeReset();
+        manualReset();
     }
 
     // Return
@@ -406,6 +415,12 @@ var animMgr = (function() {
         });
 
         events.on('faceSwitch', function() {
+
+            // Prevent skipping animation
+            $('#carousel').addClass('click-block');
+            setTimeout(function() {
+                $('#carousel').removeClass('click-block');
+            }, 1500)
 
             if (faceIndex === 0) {
                 $(faceOne[faceIndex]).addClass('anim-bounceOut');
@@ -545,7 +560,6 @@ var animMgr = (function() {
         // Fixing choppy animation bug by triggering redraw of element 1000ms after pageload
         setTimeout(function() {
             $('.marquee').trigger('click');
-            console.log('ran')
         }, 10000);
     }   
 

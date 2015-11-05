@@ -208,6 +208,16 @@ strong {
 
 .click { pointer-events:auto; z-index:110; }
 .no-click { pointer-events:none; z-index:108; }
+.click-hide { z-index:5 !important; }
+.click-block:before {
+    content:'';
+    position:absolute;
+    left: 1330px;
+    top: 685px;
+    width: 400px;
+    height: 110px;
+    z-index:200;
+}
 
 .fadeout { opacity:0 !important; }
 .fadeout-after:after { opacity: 0 !important; }
@@ -243,12 +253,12 @@ strong {
 .marquee {
     font-size:43px;
     line-height:45px;
-    color:#BABFC3;
+    color:#555555;
     position:absolute;
     white-space:nowrap;
     width:1980px;
     opacity:1;
-    transition:all 0.2s;
+    transition:all 0.2s 0.4s;
 }
 
 .marquee-left {
@@ -367,14 +377,12 @@ strong {
 
 /* Carousel Indicators */
 .carousel-indicators {
-    bottom:303px;
-    right:600px;
+    bottom: 312px;
+    right: 579px;
     left:initial;
-    width:347px;
-
+    width: 214px;
     font-size:14px;
     line-height:14px;
-
     transition:all 0.3s;
 }
 
@@ -383,9 +391,9 @@ strong {
     background-color: rgba(0,0,0,0.16);
     border:0;
     border-radius:50%;
-    width:30px;
-    height:30px;
-    margin:0 8px;
+    width: 13px;
+    height: 13px;
+    margin: 0 3px;
 }
 
 .carousel-indicators .active {
@@ -467,6 +475,31 @@ strong {
     border-right:15px solid #fff;
     border-top:30px solid transparent;
     border-bottom:30px solid transparent;
+}
+
+
+/* Restart Button */
+#reset {
+    background:url(../img/restart-icon.png) 50% 50% no-repeat;
+    background-size: 79px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 100px;
+
+    display: block;
+    width: 109px;
+    height: 89px;
+
+    position: absolute;
+    bottom: 21px;
+    left: 13px;
+    z-index: 100;
+}
+
+#reset:hover,
+#reset:active,
+#reset:focus {
+    text-decoration:none;
 }
 
 
